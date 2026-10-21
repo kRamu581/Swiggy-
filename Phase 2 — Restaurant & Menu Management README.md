@@ -1,16 +1,16 @@
-🍔 Food Delivery Platform on ServiceNow
+# 🍔 Food Delivery Platform on ServiceNow
 
-Phase 2 — Restaurant & Menu Management
+**Phase 2 — Restaurant & Menu Management**
 
-«Building a Swiggy-inspired food delivery platform using ServiceNow, one phase at a time.»
+> Building a Swiggy-inspired food delivery platform using ServiceNow, one phase at a time.
 
-Phase: 2 — Restaurant & Menu Management
-Previous Phase: Phase 1 — Foundation
-Status: Planned / In Progress
+**Phase:** 2 — Restaurant & Menu Management
+**Previous Phase:** Phase 1 — Foundation
+**Status:** Planned / In Progress
 
 ---
 
-📌 Overview
+## 📌 Overview
 
 Phase 2 focuses on building the restaurant discovery and menu management capabilities of the Food Delivery Platform.
 
@@ -20,7 +20,9 @@ Restaurant managers will be able to manage their restaurant profiles, maintain m
 
 The application will use ServiceNow tables, server-side business logic, role-based security, and a customer-facing interface.
 
-🎯 Objectives
+---
+
+## 🎯 Objectives
 
 - [ ] Implement restaurant registration and profile management.
 - [ ] Display active restaurants to customers.
@@ -34,40 +36,46 @@ The application will use ServiceNow tables, server-side business logic, role-bas
 - [ ] Create customer-facing restaurant and menu pages.
 - [ ] Test security, validation, and application behavior.
 
-🏗️ Technology Stack
+---
 
-Component| Technology
-Platform| ServiceNow
-Application| Scoped Application
-Data Storage| Custom ServiceNow Tables
-User Interface| Service Portal or UI Builder
-Client-side Logic| JavaScript
-Server-side Logic| Script Includes and GlideRecord
-Validation| Server-side validation and Business Rules
-Security| Roles and ACLs
-Workflow| Flow Designer, where required
-Version Control| GitHub
+## 🏗️ Technology Stack
 
-🗂️ Data Model
+| Component | Technology |
+|---|---|
+| Platform | ServiceNow |
+| Application | Scoped Application |
+| Data Storage | Custom ServiceNow Tables |
+| User Interface | Service Portal or UI Builder |
+| Client-side Logic | JavaScript |
+| Server-side Logic | Script Includes and GlideRecord |
+| Validation | Server-side validation and Business Rules |
+| Security | Roles and ACLs |
+| Workflow | Flow Designer, where required |
+| Version Control | GitHub |
+
+---
+
+## 🗂️ Data Model
 
 Phase 2 builds on the tables created in Phase 1.
 
-1. Food Restaurant
+### 1. Food Restaurant
 
-Purpose: Maintain restaurant profiles and publication status.
+**Purpose:** Maintain restaurant profiles and publication status.
 
-Field| Type| Purpose
-Restaurant Number| Auto-number / String| Unique identifier
-Name| String| Restaurant display name
-Description| String| Restaurant description
-Address| String| Restaurant location
-Contact Number| Phone / String| Contact information
-Status| Choice| Pending, Active, Suspended, Closed
-Opening Time| Time| Opening time
-Closing Time| Time| Closing time
-Active| True/False| Record active flag
+| Field | Type | Purpose |
+|---|---|---|
+| Restaurant Number | Auto-number / String | Unique identifier |
+| Name | String | Restaurant display name |
+| Description | String | Restaurant description |
+| Address | String | Restaurant location |
+| Contact Number | Phone / String | Contact information |
+| Status | Choice | Pending, Active, Suspended, Closed |
+| Opening Time | Time | Opening time |
+| Closing Time | Time | Closing time |
+| Active | True/False | Record active flag |
 
-Business rules:
+**Business rules:**
 
 - Restaurant names must be provided.
 - Only authorized users can activate or suspend a restaurant.
@@ -75,17 +83,18 @@ Business rules:
 - Restaurant status and opening hours must be checked before allowing new orders.
 - Existing orders must retain their restaurant reference even if the restaurant is subsequently suspended.
 
-2. Food Category
+### 2. Food Category
 
-Create a dedicated table named Food Category.
+Create a dedicated table named **Food Category**.
 
-Field| Type| Purpose
-Category Name| String| Category display name
-Description| String| Category details
-Display Order| Integer| Sort order
-Active| True/False| Category availability
+| Field | Type | Purpose |
+|---|---|---|
+| Category Name | String | Category display name |
+| Description | String | Category details |
+| Display Order | Integer | Sort order |
+| Active | True/False | Category availability |
 
-Example categories:
+**Example categories:**
 
 - Starters
 - Main Course
@@ -98,24 +107,25 @@ Example categories:
 
 A dedicated category table is preferable when administrators need to add or reorganize categories without modifying application code.
 
-3. Food Menu Item
+### 3. Food Menu Item
 
-Purpose: Manage the dishes offered by each restaurant.
+**Purpose:** Manage the dishes offered by each restaurant.
 
-Field| Type| Purpose
-Item Number| Auto-number / String| Unique item reference
-Restaurant| Reference → Food Restaurant| Owning restaurant
-Name| String| Dish name
-Description| String| Dish details
-Category| Reference → Food Category| Food category
-Price| Decimal / Currency| Selling price
-Vegetarian| True/False| Vegetarian classification
-Available| True/False| Item availability
-Active| True/False| Record active flag
-Preparation Time| Integer| Estimated preparation time
-Image URL| URL / String| Optional dish image reference
+| Field | Type | Purpose |
+|---|---|---|
+| Item Number | Auto-number / String | Unique item reference |
+| Restaurant | Reference → Food Restaurant | Owning restaurant |
+| Name | String | Dish name |
+| Description | String | Dish details |
+| Category | Reference → Food Category | Food category |
+| Price | Decimal / Currency | Selling price |
+| Vegetarian | True/False | Vegetarian classification |
+| Available | True/False | Item availability |
+| Active | True/False | Record active flag |
+| Preparation Time | Integer | Estimated preparation time |
+| Image URL | URL / String | Optional dish image reference |
 
-Business rules:
+**Business rules:**
 
 - Each menu item must belong to a valid restaurant.
 - The price must be greater than or equal to zero; production ordering rules may require a strictly positive price.
@@ -125,8 +135,11 @@ Business rules:
 - Unavailable dishes must not be added to new orders.
 - Historical order items must retain the original purchased name and price.
 
-🔗 Relationships
+---
 
+## 🔗 Relationships
+
+```text
 Food Restaurant
        |
        | 1-to-many
@@ -136,18 +149,21 @@ Food Menu Item
        | many-to-one
        v
 Food Category
+```
 
 A restaurant can have multiple menu items. A category can be associated with many menu items, and each menu item belongs to one restaurant and one category.
 
 The menu item records from this phase will be referenced by the cart and order modules in later phases.
 
-👨‍🍳 Restaurant Management Features
+---
 
-Restaurant Registration
+## 👨‍🍳 Restaurant Management Features
+
+### Restaurant Registration
 
 Authorized restaurant managers or administrators can create restaurant profiles.
 
-Required functionality:
+**Required functionality:**
 
 - Enter restaurant details.
 - Set opening and closing times.
@@ -155,7 +171,7 @@ Required functionality:
 - Review the profile.
 - Activate the restaurant after approval.
 
-Restaurant Profile Management
+### Restaurant Profile Management
 
 Restaurant managers should be able to:
 
@@ -165,9 +181,9 @@ Restaurant managers should be able to:
 - Review opening hours.
 - View restaurant status.
 
-Restaurant ownership must be validated on the server. A manager must not be able to modify a different restaurant by changing a URL, form value, or record identifier.
+> Restaurant ownership must be validated on the server. A manager must not be able to modify a different restaurant by changing a URL, form value, or record identifier.
 
-Restaurant Listing
+### Restaurant Listing
 
 The customer-facing page should display:
 
@@ -180,9 +196,11 @@ The customer-facing page should display:
 
 The listing should support pagination or another bounded-result strategy to avoid loading every restaurant at once.
 
-🍕 Menu Management Features
+---
 
-Add Menu Items
+## 🍕 Menu Management Features
+
+### Add Menu Items
 
 Restaurant managers can add a dish by entering:
 
@@ -197,19 +215,19 @@ Restaurant managers can add a dish by entering:
 
 The server must validate the restaurant reference, category, field values, and permissions before saving the record.
 
-Edit Menu Items
+### Edit Menu Items
 
 Managers can update permitted fields, including descriptions, prices, preparation times, and availability.
 
 Price changes must not rewrite the price of an already placed order.
 
-Enable or Disable Items
+### Enable or Disable Items
 
-Use the availability field to temporarily stop accepting new orders for a dish.
+Use the **availability** field to temporarily stop accepting new orders for a dish.
 
-Use the active field to retire a menu item from normal use while preserving its historical references.
+Use the **active** field to retire a menu item from normal use while preserving its historical references.
 
-Menu Display
+### Menu Display
 
 Customers should see:
 
@@ -223,25 +241,28 @@ Customers should see:
 
 Unavailable dishes should be clearly marked and must not be orderable.
 
-🔎 Search and Filtering
+---
+
+## 🔎 Search and Filtering
 
 Implement the following customer-facing filters:
 
-Feature| Expected Behavior
-Restaurant Search| Search by restaurant name
-Dish Search| Search dish names and descriptions
-Restaurant Filter| Display dishes for a selected restaurant
-Category Filter| Filter dishes by category
-Vegetarian Filter| Show vegetarian dishes
-Availability Filter| Show only available dishes
-Price Sorting| Sort menu items by price
-Name Sorting| Sort alphabetically
+| Feature | Expected Behavior |
+|---|---|
+| Restaurant Search | Search by restaurant name |
+| Dish Search | Search dish names and descriptions |
+| Restaurant Filter | Display dishes for a selected restaurant |
+| Category Filter | Filter dishes by category |
+| Vegetarian Filter | Show vegetarian dishes |
+| Availability Filter | Show only available dishes |
+| Price Sorting | Sort menu items by price |
+| Name Sorting | Sort alphabetically |
 
-Search Implementation
+### Search Implementation
 
 Use server-side Script Includes or appropriately secured Service Portal data access to retrieve matching records.
 
-Search requirements:
+**Search requirements:**
 
 - Validate and normalize search input.
 - Query only active and permitted records.
@@ -250,17 +271,17 @@ Search requirements:
 - Avoid unrestricted queries and unnecessary database calls.
 - Enforce ACLs and authorization regardless of client-side filters.
 
-Client-side filtering may improve the user experience, but it must not be the security boundary.
+> Client-side filtering may improve the user experience, but it must not be the security boundary.
 
-🖥️ Customer-Facing Pages
+---
 
-Page 1: Restaurant Listing
+## 🖥️ Customer-Facing Pages
 
-Suggested route:
+### Page 1: Restaurant Listing
 
-"/food-restaurants"
+**Suggested route:** `/food-restaurants`
 
-Components:
+**Components:**
 
 - Search input.
 - Restaurant listing.
@@ -269,13 +290,11 @@ Components:
 - Empty-state message.
 - Loading and error states.
 
-Page 2: Restaurant Menu
+### Page 2: Restaurant Menu
 
-Suggested route:
+**Suggested route:** `/food-menu?id=<restaurant_sys_id>`
 
-"/food-menu?id=<restaurant_sys_id>"
-
-Components:
+**Components:**
 
 - Restaurant name and details.
 - Menu search.
@@ -285,11 +304,11 @@ Components:
 - Price and availability.
 - Add-to-cart action placeholder.
 
-The route is illustrative; configure the actual Service Portal page or UI Builder route in your instance. Validate record identifiers and authorization server-side.
+> The route is illustrative; configure the actual Service Portal page or UI Builder route in your instance. Validate record identifiers and authorization server-side.
 
-Page 3: Restaurant Manager Dashboard
+### Page 3: Restaurant Manager Dashboard
 
-Components:
+**Components:**
 
 - Assigned restaurant profile.
 - Menu item listing.
@@ -301,16 +320,19 @@ Components:
 
 Use a suitable role-protected page and secure server-side operations.
 
-🔐 Security and Access Control
+---
 
-Roles
+## 🔐 Security and Access Control
 
-Role| Access
-"food_admin"| Manage approved restaurant and category configuration
-"food_restaurant_manager"| Manage assigned restaurant profiles and menu items
-"food_customer"| Browse published restaurants and available menus
+### Roles
 
-Security Requirements
+| Role | Access |
+|---|---|
+| `food_admin` | Manage approved restaurant and category configuration |
+| `food_restaurant_manager` | Manage assigned restaurant profiles and menu items |
+| `food_customer` | Browse published restaurants and available menus |
+
+### Security Requirements
 
 - Configure read, create, update, and delete ACLs as appropriate.
 - Validate restaurant ownership before modifying restaurant or menu records.
@@ -324,53 +346,57 @@ Security Requirements
 
 Where the platform supports it, use record-level security and explicit server-side checks together.
 
-⚙️ Implementation Plan
+---
 
-Step 1: Verify Phase 1
+## ⚙️ Implementation Plan
+
+### Step 1: Verify Phase 1
 
 Confirm that the scoped application, Food Restaurant table, Food Menu Item table, roles, and initial ACLs exist.
 
-Step 2: Create Food Category
+### Step 2: Create Food Category
 
 Create the category table, configure fields, and insert sample categories.
 
-Step 3: Configure Restaurant Management
+### Step 3: Configure Restaurant Management
 
 Create restaurant forms and list views. Configure manager access and administrator approval.
 
-Step 4: Configure Menu Management
+### Step 4: Configure Menu Management
 
 Create menu forms and list views. Configure category references, price validation, availability, and restaurant ownership checks.
 
-Step 5: Implement Server-side Operations
+### Step 5: Implement Server-side Operations
 
 Create reusable Script Includes for restaurant listing, menu retrieval, filtering, and authorized menu management.
 
 Ensure that the scripts are appropriate for the chosen interface and scoped application.
 
-Step 6: Build the Customer Pages
+### Step 6: Build the Customer Pages
 
 Create the restaurant listing and menu pages using Service Portal or UI Builder, depending on the selected interface.
 
-Step 7: Build the Manager Dashboard
+### Step 7: Build the Manager Dashboard
 
 Create role-protected menu management pages for adding, editing, and deactivating menu items.
 
-Step 8: Add Search and Filters
+### Step 8: Add Search and Filters
 
 Implement search, category filtering, vegetarian filtering, availability filtering, sorting, and pagination.
 
-Step 9: Add Sample Data
+### Step 9: Add Sample Data
 
 Create test restaurants, categories, and menu items using fictitious data.
 
-Step 10: Test and Document
+### Step 10: Test and Document
 
 Test each user role, all important validation cases, and the complete restaurant-to-menu browsing flow.
 
-🧪 Testing Checklist
+---
 
-Restaurant Tests
+## 🧪 Testing Checklist
+
+### Restaurant Tests
 
 - [ ] Create a restaurant profile.
 - [ ] Prevent saving a profile without required fields.
@@ -379,7 +405,7 @@ Restaurant Tests
 - [ ] Prevent a manager from editing another restaurant.
 - [ ] Verify opening-hours display and status behavior.
 
-Menu Tests
+### Menu Tests
 
 - [ ] Create a menu item.
 - [ ] Reject invalid prices and preparation times.
@@ -389,7 +415,7 @@ Menu Tests
 - [ ] Verify inactive items are excluded from customer listings.
 - [ ] Preserve historical order information when menu details change.
 
-Search Tests
+### Search Tests
 
 - [ ] Search by restaurant name.
 - [ ] Search by dish name.
@@ -399,7 +425,7 @@ Search Tests
 - [ ] Verify sorting and pagination.
 - [ ] Handle empty searches and no matching results.
 
-Security Tests
+### Security Tests
 
 - [ ] Customer cannot access manager operations.
 - [ ] Manager cannot edit unrelated restaurants.
@@ -408,7 +434,9 @@ Security Tests
 - [ ] Server-side authorization works even when requests are modified.
 - [ ] ACLs protect direct record access.
 
-📦 Expected Deliverables
+---
+
+## 📦 Expected Deliverables
 
 At the end of Phase 2, the project should include:
 
@@ -423,9 +451,11 @@ At the end of Phase 2, the project should include:
 9. Appropriate ACLs and server-side validation.
 10. Sample data and test results.
 
-🚀 Next Phase
+---
 
-Phase 3 — Cart, Checkout & Order Creation
+## 🚀 Next Phase
+
+**Phase 3 — Cart, Checkout & Order Creation**
 
 The next phase will implement:
 
@@ -443,7 +473,7 @@ The objective is to let a customer browse restaurants, select dishes, and place 
 
 ---
 
-Project: Food Delivery Platform on ServiceNow
-Phase: 2 — Restaurant & Menu Management
-Previous Phase: Phase 1 — Foundation
-Next Phase: Phase 3 — Cart, Checkout & Order Creation
+**Project:** Food Delivery Platform on ServiceNow
+**Phase:** 2 — Restaurant & Menu Management
+**Previous Phase:** Phase 1 — Foundation
+**Next Phase:** Phase 3 — Cart, Checkout & Order Creation
